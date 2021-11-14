@@ -1,0 +1,82 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Zork.Console/1.0.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3",
+          "Zork.Common": "1.0.0"
+        },
+        "runtime": {
+          "Zork.Console.dll": {}
+        }
+      },
+      "Fody/6.3.0": {},
+      "Newtonsoft.Json/12.0.3": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.3.23909"
+          }
+        }
+      },
+      "PropertyChanged.Fody/3.2.10": {
+        "dependencies": {
+          "Fody": "6.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.0/PropertyChanged.dll": {
+            "assemblyVersion": "3.2.10.0",
+            "fileVersion": "3.2.10.0"
+          }
+        }
+      },
+      "Zork.Common/1.0.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3",
+          "PropertyChanged.Fody": "3.2.10"
+        },
+        "runtime": {
+          "Zork.Common.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Zork.Console/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Fody/6.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kBGlW/vBUvBSyCvFI3YICNl77gjUr0KMROlBTeBPN/+J3JMU57w1dpXPwjmU4ahdBTYLomzgxKLaJ3jVNuXuQg==",
+      "path": "fody/6.3.0",
+      "hashPath": "fody.6.3.0.nupkg.sha512"
+    },
+    "Newtonsoft.Json/12.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
+      "path": "newtonsoft.json/12.0.3",
+      "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
+    },
+    "PropertyChanged.Fody/3.2.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/d/qtSAPrGKe3XwrAjwrpth5JsPLyKxXghL9ABmU3ZMgqghr8ETw+xlgFPc2QWOp6I48jy9ZUtP/mISQxjDLiw==",
+      "path": "propertychanged.fody/3.2.10",
+      "hashPath": "propertychanged.fody.3.2.10.nupkg.sha512"
+    },
+    "Zork.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
