@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Zork
+namespace Zork.Common
 {
     public class Command
     {
