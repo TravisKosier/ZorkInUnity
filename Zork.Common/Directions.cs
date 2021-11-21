@@ -1,4 +1,4 @@
-﻿namespace Zork
+﻿namespace Zork.Common
 {
     public enum Directions
     {

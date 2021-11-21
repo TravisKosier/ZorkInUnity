@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zork
+namespace Zork.Common
 {
     public interface IInputService
     {

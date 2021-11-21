@@ -45,6 +45,8 @@ namespace Zork.Common
                 { "SOUTH", new Command("SOUTH", new string[] { "SOUTH", "S" }, game => Move(game, Directions.South)) },
                 { "EAST", new Command("EAST", new string[] { "EAST", "E"}, game => Move(game, Directions.East)) },
                 { "WEST", new Command("WEST", new string[] { "WEST", "W" }, game => Move(game, Directions.West)) },
+                { "REWARD", new Command("REWARD", new string[] { "REWARD", "R"}, Reward) },
+                { "SCORE", new Command("SCORE", new string[] { "SCORE"}, Score) },
             };
         }
 
@@ -78,6 +80,7 @@ namespace Zork.Common
             if (foundCommand != null)
             {
                 foundCommand.Action(this);
+                Player.Moves++;
             }
             else
             {
@@ -103,6 +106,10 @@ namespace Zork.Common
         public static void Look(Game game) => game.Output.WriteLine(game.Player.Location.Description);
 
         private static void Quit(Game game) => game.IsRunning = false;
+
+        public static void Reward(Game game) => game.Player.Score = game.Player.Score + 5;
+
+        public static void Score(Game game) => game.Output.WriteLine($"Your current score is: {game.Player.Score}");
 
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context) => Player = new Player(World, StartingLocation);

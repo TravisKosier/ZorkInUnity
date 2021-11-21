@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Newtonsoft.Json;
 using Zork.Common;
 
@@ -15,10 +16,13 @@ namespace Zork
             ConsoleInputService input = new ConsoleInputService();
             ConsoleOutputService output = new ConsoleOutputService();
 
-            game.Player.LocationChanged += Player_LocationChanged;
+            game.Player.LocationChanged += PlayerLocationChanged;
+            game.Player.MovesChanged += PlayerMovesChanged;
+            game.Player.ScoreChanged += PlayerScoreChanged;
+
 
             game.Start(input, output);
-
+            game.Player.Score = 0;
             Room previousRoom = null;
             while (game.IsRunning)
             {
@@ -35,12 +39,22 @@ namespace Zork
 
             output.WriteLine(string.IsNullOrWhiteSpace(game.ExitMessage) ? "Thank you for playing!" : game.ExitMessage);
         }
-
         private enum CommandLineArguments
         {
             GameFilename = 0
         }
-        private static void Player_LocationChanged(object sender, Room e)
+
+        private static void PlayerScoreChanged(object sender, int e)
+        {
+            System.Console.WriteLine($"Incredible! Your score has increased to {e}");
+        }
+
+        private static void PlayerMovesChanged(object sender, int e)
+        {
+            
+        }
+
+        private static void PlayerLocationChanged(object sender, Room e)
         {
             System.Console.WriteLine($"You moved to {e.Name}");
         }

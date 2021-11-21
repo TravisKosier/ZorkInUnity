@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Zork
+namespace Zork.Common
 {
     public static class Assert
     {

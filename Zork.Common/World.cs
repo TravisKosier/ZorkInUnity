@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
-namespace Zork
+namespace Zork.Common
 {
     public class World : INotifyPropertyChanged
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Newtonsoft.Json;
 
-namespace Zork
+namespace Zork.Common
 {
     public class Room : IEquatable<Room>, INotifyPropertyChanged
     {
