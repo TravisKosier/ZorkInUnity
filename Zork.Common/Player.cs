@@ -9,6 +9,7 @@ namespace Zork.Common
         public event EventHandler<Room> LocationChanged;
         public event EventHandler<int> MovesChanged;
         public event EventHandler<int> ScoreChanged;
+        public event EventHandler<bool> HasQuitChanged;
 
         public World World { get; }
 
@@ -61,6 +62,22 @@ namespace Zork.Common
             }
         }
 
+        public bool HasQuit
+        {
+            get
+            {
+                return _hasQuit;
+            }
+            set
+            {
+                if (_hasQuit != value)
+                {
+                    _hasQuit = value;
+                    HasQuitChanged?.Invoke(this, _hasQuit);
+                }
+            }
+        }
+
         public Player(World world, string startingLocation)
         {
             Assert.IsTrue(world != null);
@@ -84,5 +101,6 @@ namespace Zork.Common
         private Room _location;
         private int _score;
         private int _moves;
+        private bool _hasQuit = false;
     }
 }

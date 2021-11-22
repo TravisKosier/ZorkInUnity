@@ -105,7 +105,11 @@ namespace Zork.Common
 
         public static void Look(Game game) => game.Output.WriteLine(game.Player.Location.Description);
 
-        private static void Quit(Game game) => game.IsRunning = false;
+        private static void Quit(Game game)
+        {
+            game.Player.HasQuit = true;
+            game.IsRunning = false;
+        }
 
         public static void Reward(Game game) => game.Player.Score = game.Player.Score + 5;
 
