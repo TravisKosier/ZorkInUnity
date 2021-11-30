@@ -78,6 +78,22 @@ namespace Zork.Common
             }
         }
 
+        public WorldObject[] Inventory
+        {
+            get
+            {
+                return _inventory;
+            }
+            set
+            {
+                if (_inventory != value)
+                {
+                    _inventory = value;
+                    //HasQuitChanged?.Invoke(this, _inventory);
+                }
+            }
+        }
+
         public Player(World world, string startingLocation)
         {
             Assert.IsTrue(world != null);
@@ -102,5 +118,6 @@ namespace Zork.Common
         private int _score;
         private int _moves;
         private bool _hasQuit = false;
+        private WorldObject[] _inventory;
     }
 }

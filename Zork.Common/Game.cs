@@ -47,6 +47,13 @@ namespace Zork.Common
                 { "WEST", new Command("WEST", new string[] { "WEST", "W" }, game => Move(game, Directions.West)) },
                 { "REWARD", new Command("REWARD", new string[] { "REWARD", "R"}, Reward) },
                 { "SCORE", new Command("SCORE", new string[] { "SCORE"}, Score) },
+                { "INVENTORY", new Command("INVENTORY", new string[] { "INVENTORY","I"}, Inventory) },
+                //{ "EXAMINE X", new Command("EXAMINE X", new string[] { "EXAMINE X","E X"}, Examine(game,X)) },
+                //{ "GET X", new Command("GET X", new string[] { "GET X","G X"}, Get(game,X)) },
+                //{ "DROP X", new Command("DROP X", new string[] { "DROP X","D X"}, Drop(game,X)) },
+                //{ "EQUIP X", new Command("EQUIP X", new string[] { "EQUIP X"}, Equip(game,X)) }, 
+                //{ "UNEQUIP X", new Command("EXAMINE X", new string[] { "UNEQUIP X"}, Unequip(game,X)) },
+                //{ "USE X ON Y", new Command("USE X ON Y", new string[] { "USE X ON Y"}, Use(game,X,Y)) }
             };
         }
 
@@ -60,9 +67,7 @@ namespace Zork.Common
             Output = output;
 
             Output.WriteLine(string.IsNullOrWhiteSpace(WelcomeMessage) ? "Welcome to Zork!" : WelcomeMessage);
-            IsRunning = true;
-
-            
+            IsRunning = true;            
         }
 
         private void InputReceivedHandler(object sender, string commandString)
@@ -114,6 +119,22 @@ namespace Zork.Common
         public static void Reward(Game game) => game.Player.Score = game.Player.Score + 5;
 
         public static void Score(Game game) => game.Output.WriteLine($"Your current score is: {game.Player.Score}");
+
+        public static void Inventory(Game game)
+        {
+            game.Output.WriteLine("Your inventory contains:");
+            foreach (WorldObject wObject in game.Player.Inventory) 
+            {
+                if (wObject.IsEquipped)
+                {
+                    game.Output.WriteLine($"{wObject.Name} - Equipped to {wObject.EquipLocation}");
+                }
+                else
+                {
+                    game.Output.WriteLine(wObject.Name);
+                }
+            } 
+        }
 
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context) => Player = new Player(World, StartingLocation);

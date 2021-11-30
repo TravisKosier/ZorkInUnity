@@ -70,6 +70,19 @@
       }
     ]
   },
+  {
+    "WorldObjects": [
+      {
+        "Name": "Key",
+        "WorldDescription": "There's a key sitting in the grass.",
+        "ExamineDescription": "This key looks like it would go to a chest.",
+        "LocationInWorldName": "WestOfHouse",
+        "IsTakeable": "True",
+        "IsEquippable": "False",
+        "EquipLocation": ""
+      }
+    ]
+  },
   "StartingLocation": "West of House",
   "WelcomeMessage": "Welcome to Zork!",
   "ExitMessage": "Thank you for playing!"
