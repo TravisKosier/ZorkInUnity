@@ -45,15 +45,15 @@ namespace Zork.Common
                 { "SOUTH", new Command("SOUTH", new string[] { "SOUTH", "S" }, game => Move(game, Directions.South)) },
                 { "EAST", new Command("EAST", new string[] { "EAST", "E"}, game => Move(game, Directions.East)) },
                 { "WEST", new Command("WEST", new string[] { "WEST", "W" }, game => Move(game, Directions.West)) },
-                { "REWARD", new Command("REWARD", new string[] { "REWARD", "R"}, game => Reward(game,5)) },
+                { "REWARD", new Command("REWARD", new string[] { "REWARD", "R"}, Reward) },
                 { "SCORE", new Command("SCORE", new string[] { "SCORE"}, Score) },
                 { "INVENTORY", new Command("INVENTORY", new string[] { "INVENTORY","I"}, Inventory) },
-                { "EXAMINE X", new Command("EXAMINE X", new string[] { "EXAMINE X","E X"},game => Examine(game,"X")) },
-                { "GET X", new Command("GET X", new string[] { "GET X","G X"}, game => Get(game,"X")) },
-                { "DROP X", new Command("DROP X", new string[] { "DROP X","D X"}, game => Drop(game,"X")) },
-                { "EQUIP X", new Command("EQUIP X", new string[] { "EQUIP X"}, game => Equip(game,"X")) }, 
-                { "UNEQUIP X", new Command("EXAMINE X", new string[] { "UNEQUIP X"}, game => Unequip(game,"X")) },
-                { "USE X ON Y", new Command("USE X ON Y", new string[] { "USE X ON Y"}, game => Use(game,"X","Y")) }
+                //{ "EXAMINE X", new Command("EXAMINE X", new string[] { "EXAMINE X","E X"}, Examine(game,X)) },
+                //{ "GET X", new Command("GET X", new string[] { "GET X","G X"}, Get(game,X)) },
+                //{ "DROP X", new Command("DROP X", new string[] { "DROP X","D X"}, Drop(game,X)) },
+                //{ "EQUIP X", new Command("EQUIP X", new string[] { "EQUIP X"}, Equip(game,X)) }, 
+                //{ "UNEQUIP X", new Command("EXAMINE X", new string[] { "UNEQUIP X"}, Unequip(game,X)) },
+                //{ "USE X ON Y", new Command("USE X ON Y", new string[] { "USE X ON Y"}, Use(game,X,Y)) }
             };
         }
 
@@ -116,7 +116,7 @@ namespace Zork.Common
             game.IsRunning = false;
         }
 
-        public static void Reward(Game game, int scoreAmt) => game.Player.Score = game.Player.Score + scoreAmt;
+        public static void Reward(Game game) => game.Player.Score = game.Player.Score + 5;
 
         public static void Score(Game game) => game.Output.WriteLine($"Your current score is: {game.Player.Score}");
 
@@ -134,228 +134,6 @@ namespace Zork.Common
                     game.Output.WriteLine(wObject.Name);
                 }
             } 
-        }
-
-        public static void Get(Game game, string objName)
-        {
-            WorldObject obj = new WorldObject(objName);
-            foreach(WorldObject wObj in game.World.WorldObjects)
-            {
-                if (wObj.Name == objName)
-                {
-                    obj = wObj;
-                }
-            }
-
-            if (game.World.WorldObjects.Contains(obj))
-            {
-                if (obj.LocationInWorld != game.Player.Location.Name)
-                {
-                    game.Output.WriteLine($"A {obj.LocationInWorld} doesn't appear to be here in {game.Player.Location.Name}");
-                }
-                else
-                {
-                    game.Player.Inventory.Add(obj);
-                    obj.LocationInWorld = "PlayerInventory";
-                    Reward(game, obj.ScoreValue);
-                    obj.ScoreValue = 0; //Remove score value so the player cannot farm score from picking up and dropping an item repeatedly
-
-                }
-            }
-            else
-            {
-                game.Output.WriteLine($"Whatever a {obj.Name} is, there isn't one here, or anywhere in this world, for that matter.");
-            }
-            
-        }
-
-        public static void Drop(Game game, string objName)
-        {
-            WorldObject obj = new WorldObject(objName);
-            foreach (WorldObject wObj in game.World.WorldObjects)
-            {
-                if (wObj.Name == objName)
-                {
-                    obj = wObj;
-                }
-            }
-
-            if (game.World.WorldObjects.Contains(obj))
-            {
-                if (obj.LocationInWorld != "PlayerInventory")
-                {
-                    game.Output.WriteLine($"You don't appear to have a {obj.Name} to dispose of here in {game.Player.Location.Name}");
-                }
-                else
-                {
-                    game.Player.Inventory.Remove(obj);
-                    obj.LocationInWorld = "game.Player.Location.Name";
-                }
-            }
-            else
-            {
-                game.Output.WriteLine($"Whatever a {obj.Name} is, there isn't one here, or anywhere in this world, for that matter.");
-            }
-
-        }
-
-        public static void Equip(Game game, string objName)
-        {
-            WorldObject obj = new WorldObject(objName);
-            foreach (WorldObject wObj in game.World.WorldObjects)
-            {
-                if (wObj.Name == objName)
-                {
-                    obj = wObj;
-                }
-            }
-
-            if (game.World.WorldObjects.Contains(obj))
-            {
-                if (obj.LocationInWorld != "PlayerInventory")
-                {
-                    game.Output.WriteLine($"A {obj.LocationInWorld} doesn't appear to be in your inventory");
-                }
-                else
-                {
-                    if (obj.IsEquippable)
-                    {
-                        if (obj.IsEquipped)
-                        {
-                            obj.IsEquipped = true;
-                            //Change object in inventory description?
-                        }
-                        else
-                        {
-                            game.Output.WriteLine($"Your {obj.Name} is already on your {obj.EquipLocation}!");
-                        }
-                    }
-                    else
-                    {
-                        game.Output.WriteLine($"You can't just strap a {obj.Name} to your body!");
-                    }
-
-                }
-            }
-            else
-            {
-                game.Output.WriteLine($"Whatever a {obj.Name} is, there isn't in your inventory, or anywhere in this world, for that matter.");
-            }
-
-        }
-
-        public static void Unequip(Game game, string objName)
-        {
-            WorldObject obj = new WorldObject(objName);
-            foreach (WorldObject wObj in game.World.WorldObjects)
-            {
-                if (wObj.Name == objName)
-                {
-                    obj = wObj;
-                }
-            }
-
-            if (game.World.WorldObjects.Contains(obj))
-            {
-                if (obj.LocationInWorld != "PlayerInventory")
-                {
-                    game.Output.WriteLine($"A {obj.LocationInWorld} doesn't appear to be in your inventory, much less on your person!");
-                }
-                else
-                {
-                    if (obj.IsEquipped)
-                    {
-                        obj.IsEquipped = false;
-                        //Change object in inventory description?
-                    }
-                    else
-                    {
-                        game.Output.WriteLine($"Your {obj.Name} isn't equipped in the first place!");
-                    }
-
-                }
-            }
-            else
-            {
-                game.Output.WriteLine($"Whatever a {obj.Name} is, there isn't in your inventory, or anywhere in this world, for that matter.");
-            }
-
-        }
-
-        public static void Examine(Game game, string objName)
-        {
-            WorldObject obj = new WorldObject(objName);
-            foreach (WorldObject wObj in game.World.WorldObjects)
-            {
-                if (wObj.Name == objName)
-                {
-                    obj = wObj;
-                }
-            }
-
-            if (game.World.WorldObjects.Contains(obj))
-            {
-                if (obj.LocationInWorld == "PlayerInventory" || obj.LocationInWorld == game.Player.Location.Name)
-                {
-                    //Give inventory desc
-                    game.Output.WriteLine($"{obj.Name} - {obj.ExamineDescription}");
-                }
-                else
-                {
-                    game.Output.WriteLine($"There isn't a {obj.Name} nearby, or in your inventory, for that matter.");
-                }
-            }
-            else
-            {
-                game.Output.WriteLine($"Whatever a {obj.Name} is, there isn't in your inventory, or anywhere in this world, for that matter.");
-            }
-
-        }
-
-        public static void Use(Game game, string objOneName, string objTwoName)
-        {
-            WorldObject objOne = new WorldObject(objOneName);
-            foreach (WorldObject wObj in game.World.WorldObjects)
-            {
-                if (wObj.Name == objOneName)
-                {
-                    objOne = wObj;
-                }
-            }
-            WorldObject objTwo = new WorldObject(objTwoName);
-            foreach (WorldObject wObj in game.World.WorldObjects)
-            {
-                if (wObj.Name == objTwoName)
-                {
-                    objTwo = wObj;
-                }
-            }
-
-            if(game.World.WorldObjects.Contains(objOne) && game.World.WorldObjects.Contains(objTwo))
-            {
-                if (objOne.LocationInWorld == "PlayerInventory" && objTwo.LocationInWorld == game.Player.Location.Name)
-                {
-                    //If objOne is the correct object to use on objTwo, make something happen
-                    /*
-                    if (objOne)
-                    {
-
-                    }
-                    else
-                    {
-                        game.Output.WriteLine($"{objOne.Name} isn't the object to use on {objTwo.Name}. Try examining {objTwo.Name} again.");
-                    }
-                    */
-                }
-                else
-                {
-                    game.Output.WriteLine("You must use an object from your inventory on an object in the room.");
-                }
-            }
-            else
-            {
-                game.Output.WriteLine("One of those objects isn't even in the world, much less this area or your inventory.");
-            }
         }
 
         [OnDeserialized]

@@ -74,33 +74,12 @@
     "WorldObjects": [
       {
         "Name": "Key",
-        "WorldDescription": "There's a key sitting on the ground.",
+        "WorldDescription": "There's a key sitting in the grass.",
         "ExamineDescription": "This key looks like it would go to a chest.",
         "LocationInWorldName": "WestOfHouse",
         "IsTakeable": "True",
         "IsEquippable": "False",
-        "EquipLocation": "Hands",
-        "ScoreValue": "5"
-      },
-      {
-        "Name": "Chest",
-        "WorldDescription": "There's a chest sitting on the ground.",
-        "ExamineDescription": "This chest looks like a key would go to it.",
-        "LocationInWorldName": "WestOfHouse",
-        "IsTakeable": "False",
-        "IsEquippable": "False",
-        "EquipLocation": "Hands",
-        "ScoreValue": "0"
-      },
-      {
-        "Name": "Jewel",
-        "WorldDescription": "There's a jewel sitting on the ground.",
-        "ExamineDescription": "This jewel looks like it's worth a lot of money.",
-        "LocationInWorldName": "Nowhere",
-        "IsTakeable": "True",
-        "IsEquippable": "False",
-        "EquipLocation": "Hands",
-        "ScoreValue": "10"
+        "EquipLocation": ""
       }
     ]
   },
