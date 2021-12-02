@@ -24,13 +24,16 @@ namespace Zork.Common
         public bool IsTakeable { get; set; }
 
         [JsonProperty(PropertyName = "IsEquippable", Order = 6)]
-        public string IsEquippable { get; set; }
+        public bool IsEquippable { get; set; }
 
         [JsonIgnore]
         public bool IsEquipped { get; set; }
 
         [JsonProperty(PropertyName = "EquipLocation", Order = 7)]
         public string EquipLocation { get; set; }
+
+        [JsonProperty(PropertyName = "ScoreValue", Order = 8)]
+        public int ScoreValue { get; set; }
 
         public WorldObject(string name = null)
         {
