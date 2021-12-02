@@ -29,7 +29,7 @@ namespace Zork
                 output.WriteLine(game.Player.Location);
                 if (previousRoom != game.Player.Location)
                 {
-                    Game.Look(game);
+                    Game.Look(new CommandContext(game,"Look"));
                     previousRoom = game.Player.Location;
                 }
 

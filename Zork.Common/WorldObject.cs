@@ -16,8 +16,7 @@ namespace Zork.Common
         [JsonProperty(PropertyName = "ExamineDescription", Order = 3)]
         public string ExamineDescription { get; set; }
 
-        [JsonProperty(PropertyName = "LocationInWorld", Order = 4)]
-        //private Dictionary<Room, string> LocationInWorldName { get; set; } = new Dictionary<Room, string>();
+        [JsonProperty(PropertyName = "LocationInWorldName", Order = 4)]
         public string LocationInWorld { get; set; }
 
         [JsonProperty(PropertyName = "IsTakeable", Order = 5)]
@@ -34,6 +33,12 @@ namespace Zork.Common
 
         [JsonProperty(PropertyName = "ScoreValue", Order = 8)]
         public int ScoreValue { get; set; }
+
+        [JsonProperty(PropertyName = "CorrectUseObject", Order = 9)]
+        public string CorrectUseObjectName { get; set; }
+
+        [JsonProperty(PropertyName = "RewardObject", Order = 10)]
+        public string RewardObjectName { get; set; }
 
         public WorldObject(string name = null)
         {

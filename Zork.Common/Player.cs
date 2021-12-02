@@ -90,7 +90,6 @@ namespace Zork.Common
                 if (_inventory != value)
                 {
                     _inventory = value;
-                    //HasQuitChanged?.Invoke(this, _inventory);
                 }
             }
         }
@@ -102,6 +101,7 @@ namespace Zork.Common
 
             World = world;
             Location = world.RoomsByName[startingLocation];
+            Inventory = new List<WorldObject>();
         }
 
         public bool Move(Directions direction)

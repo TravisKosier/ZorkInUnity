@@ -10,9 +10,13 @@ namespace Zork.Common
         
         public string[] Verbs { get; set; }
 
-        public Action<Game> Action { get; set; }
+        public string Description { get; set; }
 
-        public Command(string name, IEnumerable<string> verbs, Action<Game> action)
+        public string VerbAliasList { get; set; }
+
+        public Action<CommandContext> Action { get; set; }
+
+        public Command(string name, IEnumerable<string> verbs, Action<CommandContext> action, string description = null)
         {
             Assert.IsNotNull(name);
             Assert.IsNotNull(verbs);
@@ -21,6 +25,9 @@ namespace Zork.Common
             Name = name;
             Verbs = verbs.ToArray();
             Action = action;
+            Description = description;
+            VerbAliasList = string.Join(",", Verbs);
+
         }
 
         public override string ToString() => Name;

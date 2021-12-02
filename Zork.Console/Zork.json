@@ -68,29 +68,31 @@
           "South": "Forest 3"
         }
       }
-    ]
-  },
-  {
+    ],
     "WorldObjects": [
       {
         "Name": "Key",
         "WorldDescription": "There's a key sitting on the ground.",
         "ExamineDescription": "This key looks like it would go to a chest.",
-        "LocationInWorldName": "WestOfHouse",
+        "LocationInWorldName": "West Of House",
         "IsTakeable": "True",
         "IsEquippable": "False",
         "EquipLocation": "Hands",
-        "ScoreValue": "5"
+        "ScoreValue": "5",
+        "CorrectUseObject": "",
+        "RewardObject": ""
       },
       {
         "Name": "Chest",
         "WorldDescription": "There's a chest sitting on the ground.",
         "ExamineDescription": "This chest looks like a key would go to it.",
-        "LocationInWorldName": "WestOfHouse",
+        "LocationInWorldName": "West Of House",
         "IsTakeable": "False",
         "IsEquippable": "False",
         "EquipLocation": "Hands",
-        "ScoreValue": "0"
+        "ScoreValue": "0",
+        "CorrectUseObject": "Key",
+        "RewardObject": "Jewel"
       },
       {
         "Name": "Jewel",
@@ -100,7 +102,21 @@
         "IsTakeable": "True",
         "IsEquippable": "False",
         "EquipLocation": "Hands",
-        "ScoreValue": "10"
+        "ScoreValue": "10",
+        "CorrectUseObject": "",
+        "RewardObject": ""
+      },
+      {
+        "Name": "Boots",
+        "WorldDescription": "There's some boots sitting on the ground.",
+        "ExamineDescription": "These boots looks like they'd help you walk across dangerous ground'.",
+        "LocationInWorldName": "West Of House",
+        "IsTakeable": "True",
+        "IsEquippable": "True",
+        "EquipLocation": "Feet",
+        "ScoreValue": "0",
+        "CorrectUseObject": "",
+        "RewardObject": ""
       }
     ]
   },
