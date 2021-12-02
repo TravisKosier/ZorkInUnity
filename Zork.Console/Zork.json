@@ -98,7 +98,7 @@
         "Name": "Jewel",
         "WorldDescription": "There's a jewel sitting on the ground.",
         "ExamineDescription": "This jewel looks like it's worth a lot of money.",
-        "LocationInWorldName": "Nowhere",
+        "LocationInWorldName": "Unknown",
         "IsTakeable": "True",
         "IsEquippable": "False",
         "EquipLocation": "Hands",

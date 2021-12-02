@@ -134,7 +134,7 @@ namespace Zork.Common
                 }
                 
             }
-            game.Output.WriteLine();
+            game.Output.WriteLine("");
         }
 
         private static void Move(CommandContext commandContext, Directions direction)
@@ -207,12 +207,15 @@ namespace Zork.Common
                     }
                 }
             }
+            game.Output.WriteLine("");
 
             game.Output.WriteLine("The world contains:");
             foreach(WorldObject wo in game.World.WorldObjects)
             {
                 game.Output.WriteLine($"> \"{wo.Name}\" in \"{wo.LocationInWorld}\", ");
             }
+
+            game.Output.WriteLine("");
         }
 
         public static void Get(CommandContext commandContext)
