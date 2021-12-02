@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace Zork.Common
 {
@@ -78,7 +79,7 @@ namespace Zork.Common
             }
         }
 
-        public WorldObject[] Inventory
+        public List<WorldObject> Inventory
         {
             get
             {
@@ -118,6 +119,6 @@ namespace Zork.Common
         private int _score;
         private int _moves;
         private bool _hasQuit = false;
-        private WorldObject[] _inventory;
+        private List<WorldObject> _inventory;
     }
 }
