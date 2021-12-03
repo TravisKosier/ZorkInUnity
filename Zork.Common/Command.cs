@@ -27,7 +27,6 @@ namespace Zork.Common
             Action = action;
             Description = description;
             VerbAliasList = string.Join(",", Verbs);
-
         }
 
         public override string ToString() => Name;

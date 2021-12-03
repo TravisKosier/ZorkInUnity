@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
         _game.Start(InputService, OutputService);
         CurrentLocationText.text = _game.Player.Location.ToString();
-        _game.Commands["LOOK"].Action(_game);
+        _game.Commands["LOOK"].Action(new CommandContext(_game,""));
     }
 
     // Update is called once per frame
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
     {
         CurrentLocationText.text = newLocation.ToString();
         OutputService.WriteLine($"You moved to {newLocation.ToString()}.");
-        _game.Commands["LOOK"].Action(_game);
+        _game.Commands["LOOK"].Action(new CommandContext(_game, ""));
     }
 
     private void HasQuitChanged(object sender, bool newHasQuit)

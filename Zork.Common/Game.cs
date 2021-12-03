@@ -74,27 +74,19 @@ namespace Zork.Common
         private void InputReceivedHandler(object sender, string commandString)
         {
             String[] splitCommand = commandString.Split(' ');
-            /*foreach(string str in splitCommand)
-            {
-                Output.WriteLine($"> {str}");
-            }*/
-            
             CommandContext newContext = new CommandContext(this, commandString);
             {
                 if (splitCommand.Length == 1)
                 {
                     newContext = new CommandContext(this, commandString, splitCommand[0]);
-                    Output.WriteLine($"> New CommandContext: {this}, \"{commandString}\", V:{splitCommand[0]}");
                 }
                 else if (splitCommand.Length == 2)
                 {
                     newContext = new CommandContext(this, commandString, splitCommand[0], splitCommand[1]);
-                    Output.WriteLine($"> New CommandContext: {this}, \"{commandString}\", V:{splitCommand[0]}, S:{splitCommand[1]}");
                 }
                 else
                 {
                     newContext = new CommandContext(this, commandString, splitCommand[0], splitCommand[1], splitCommand[splitCommand.Count() - 1]);
-                    Output.WriteLine($"> New CommandContext: {this}, \"{commandString}\", V:{splitCommand[0]}, S1:{splitCommand[1]}, S2:{splitCommand[splitCommand.Count() - 1]}");
                 }
             }
             
@@ -140,9 +132,9 @@ namespace Zork.Common
         private static void Move(CommandContext commandContext, Directions direction)
         {
             Game game = commandContext.Game;
-            if (game.Player.Move(direction) == false)
+            if (game.Player.Move(commandContext,direction) == false)
             {
-                game.Output.WriteLine("The way is shut!");
+                game.Output.WriteLine("The way is shut!");                
             }
         }
 
@@ -310,9 +302,17 @@ namespace Zork.Common
                 }
                 else
                 {
-                    game.Player.Inventory.Remove(obj);
-                    obj.LocationInWorld = game.Player.Location.Name;
-                    game.Output.WriteLine($"The \"{obj.Name}\" is now sitting here on the ground in {game.Player.Location.Name}.");
+                    if (obj.IsEquipped)
+                    {
+                        game.Output.WriteLine($"You'll need to unequip the {obj.Name} before you drop it here.");
+                    }
+                    else
+                    {
+                        game.Player.Inventory.Remove(obj);
+                        obj.LocationInWorld = game.Player.Location.Name;
+                        game.Output.WriteLine($"The {obj.Name} is now sitting here on the ground in {game.Player.Location.Name}.");
+                    }
+                    
                 }
             }
             else
@@ -365,7 +365,7 @@ namespace Zork.Common
                         if (!obj.IsEquipped)
                         {
                             obj.IsEquipped = true;
-                            //Change object in inventory description?
+                            game.Output.WriteLine($"You place your {obj.Name} on your {obj.EquipLocation}.");
                         }
                         else
                         {
@@ -425,8 +425,15 @@ namespace Zork.Common
                 {
                     if (obj.IsEquipped)
                     {
-                        obj.IsEquipped = false;
-                        //Change object in inventory description?
+                        if (game.Player.Location.EquipmentToEnter == obj.Name)
+                        {
+                            game.Output.WriteLine($"You can't remove your {obj.Name} here! You needed it to get here, and might get stuck if you lost it.");
+                        }
+                        else
+                        {
+                            obj.IsEquipped = false;
+                            game.Output.WriteLine($"You return your {obj.Name} to your bag.");
+                        }
                     }
                     else
                     {
@@ -545,7 +552,7 @@ namespace Zork.Common
                     //If objOne is the correct object to use on objTwo, make something happen
                     if (objTwo.CorrectUseObjectName == null || objTwo.CorrectUseObjectName == "")
                     {
-                        game.Output.WriteLine($"{objTwo.Name} doesn't need anything used on it. Why don't you just take it?");
+                        game.Output.WriteLine($"The {objTwo.Name} doesn't need anything used on it. Why don't you just take it?");
                     }
                     else
                     {
@@ -560,13 +567,13 @@ namespace Zork.Common
                                     break;
                                 }
                             }
-                            game.Output.WriteLine($"You successfully use the {objOne.Name} on the {objTwo.Name}, revealing a {lootObj.Name}.");
+                            game.Output.WriteLine($"You successfully use the {objOne.Name} on the {objTwo.Name}, revealing a {lootObj.Name} within.");
                             lootObj.LocationInWorld = game.Player.Location.Name;
                             Get(new CommandContext(game,$"get {lootObj.Name}", "GET",lootObj.Name));
                         }
                         else
                         {
-                            game.Output.WriteLine($"{objOne.Name} isn't the object to use on the {objTwo.Name}. Try examining the {objTwo.Name} again.");
+                            game.Output.WriteLine($"The {objOne.Name} isn't the object to use on the {objTwo.Name}. Try examining the {objTwo.Name} again.");
                         }
                     }
                     

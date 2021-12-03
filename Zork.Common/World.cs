@@ -36,10 +36,6 @@ namespace Zork.Common
             {
                 room.UpdateNeighbors(this);
             }
-            //foreach (WorldObject worldObject in WorldObjects)
-            //{
-            //    worldObject.PlaceInWorld();
-            //}
         } 
 
         private Dictionary<string, Room> _roomsByName;

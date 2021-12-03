@@ -104,12 +104,41 @@ namespace Zork.Common
             Inventory = new List<WorldObject>();
         }
 
-        public bool Move(Directions direction)
+        public bool Move(CommandContext commandContext, Directions direction)
         {
+            Game game = commandContext.Game;
             bool isValidMove = Location.Neighbors.TryGetValue(direction, out Room destination);
             if (isValidMove)
             {
-                Location = destination;
+                if (destination?.EquipmentToEnter != "")
+                {
+                    foreach (WorldObject wObj in game.World.WorldObjects)
+                    {
+                        if (wObj.Name == destination.EquipmentToEnter && wObj.IsEquipped == true)
+                        {
+                            isValidMove = true;
+                            break;
+                        }
+                        else
+                        {
+                            isValidMove = false;
+                        }
+                    }
+                    if (!isValidMove)
+                    {
+                        game.Output.WriteLine(destination.NoEquipmentMessage);
+                    }
+                    else
+                    {
+                        game.Output.WriteLine($"With the aid of your {destination.EquipmentToEnter}, you are able to proceed into {destination.Name}");
+                        Location = destination;
+                    }
+                }
+                else
+                {
+                    Location = destination;
+                }
+                
             }
 
             return isValidMove;

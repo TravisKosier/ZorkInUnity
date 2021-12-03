@@ -18,6 +18,12 @@ namespace Zork.Common
         [JsonProperty(PropertyName = "Neighbors", Order = 3)]
         private Dictionary<Directions, string> NeighborNames { get; set; } = new Dictionary<Directions, string>();
 
+        [JsonProperty(PropertyName = "Equipment",Order = 4)]
+        public string EquipmentToEnter { get; set; }
+
+        [JsonProperty(Order = 5)]
+        public string NoEquipmentMessage { get; set; }
+
         [JsonIgnore]
         public IReadOnlyDictionary<Directions, Room> Neighbors => _neighbors;
 

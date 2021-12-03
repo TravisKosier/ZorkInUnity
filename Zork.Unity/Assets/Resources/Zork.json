@@ -3,12 +3,14 @@
     "Rooms": [
       {
         "Name": "West of House",
-        "Description": "This is an open field west of a white house, with a boarded front door.",
+        "Description": "This is an open field west of a white house, with a boarded front door",
         "Neighbors": {
           "North": "North of House",
           "South": "South of House",
           "West": "Forest 1"
-        }
+        },
+        "Equipment": "",
+        "NoEquipmentMessage": ""
       },
       {
         "Name": "North of House",
@@ -17,7 +19,9 @@
           "North": "Forest 2",
           "East": "Behind House",
           "West": "West of House"
-        }
+        },
+        "Equipment": "",
+        "NoEquipmentMessage": ""
       },
       {
         "Name": "South of House",
@@ -25,7 +29,9 @@
         "Neighbors": {
           "East": "Behind House",
           "West": "West of House"
-        }
+        },
+        "Equipment": "",
+        "NoEquipmentMessage": ""
       },
       {
         "Name": "Behind House",
@@ -34,23 +40,39 @@
           "North": "North of House",
           "East": "Clearing",
           "South": "South of House"
-        }
+        },
+        "Equipment": "",
+        "NoEquipmentMessage": ""
       },
       {
         "Name": "Forest 1",
-        "Description": "This is a forest, with trees in all directions around you.",
+        "Description": "This is a forest, with trees in all directions around you. The mouth of a cave appears to the west, but it is forebodingly dark within.",
         "Neighbors": {
           "South": "Forest 3",
-          "East": "West of House"
-        }
+          "East": "West of House",
+          "West": "Forest Cave"
+        },
+        "Equipment": "",
+        "NoEquipmentMessage": ""
       },
       {
         "Name": "Forest 2",
-        "Description": "This is a dimly lit forest, with large trees all around. One particularly large tree with some low branches stands here.",
+        "Description": "This is a dimly lit forest, with large trees all around.",
         "Neighbors": {
           "South": "Clearing",
           "East": "Clearing"
-        }
+        },
+        "Equipment": "",
+        "NoEquipmentMessage": ""
+      },
+      {
+        "Name": "Forest Cave",
+        "Description": "This is cave, dimly lit as it is, seems grue-free. For now.",
+        "Neighbors": {
+          "East": "Forest 1"
+        },
+        "Equipment": "Lantern",
+        "NoEquipmentMessage": "You can't go in a dark cave without a light source. You might be eaten by a grue!"
       },
       {
         "Name": "Forest 3",
@@ -58,7 +80,9 @@
         "Neighbors": {
           "North": "South of House",
           "East": "Clearing"
-        }
+        },
+        "Equipment": "",
+        "NoEquipmentMessage": ""
       },
       {
         "Name": "Clearing",
@@ -66,7 +90,83 @@
         "Neighbors": {
           "West": "Forest 2",
           "South": "Forest 3"
-        }
+        },
+        "Equipment": "",
+        "NoEquipmentMessage": ""
+      }
+    ],
+    "WorldObjects": [
+      {
+        "Name": "Key",
+        "WorldDescription": "There's a brass key sitting on the ground.",
+        "ExamineDescription": "This key looks like it would go to a chest.",
+        "LocationInWorldName": "West Of House",
+        "IsTakeable": "True",
+        "IsEquippable": "False",
+        "EquipLocation": "Hands",
+        "ScoreValue": "5",
+        "CorrectUseObject": "",
+        "RewardObject": ""
+      },
+      {
+        "Name": "Keycard",
+        "WorldDescription": "There's a plastic keycard sitting on the ground.",
+        "ExamineDescription": "This keycard looks like it would go to an electronic lock.",
+        "LocationInWorldName": "West Of House",
+        "IsTakeable": "True",
+        "IsEquippable": "False",
+        "EquipLocation": "Hands",
+        "ScoreValue": "5",
+        "CorrectUseObject": "",
+        "RewardObject": ""
+      },
+      {
+        "Name": "Chest",
+        "WorldDescription": "There's a chest sitting on the ground.",
+        "ExamineDescription": "This chest looks like a key would go to it.",
+        "LocationInWorldName": "Forest 1",
+        "IsTakeable": "False",
+        "IsEquippable": "False",
+        "EquipLocation": "Hands",
+        "ScoreValue": "0",
+        "CorrectUseObject": "Key",
+        "RewardObject": "Lantern"
+      },
+      {
+        "Name": "Locker",
+        "WorldDescription": "There's a locker sitting on the ground.",
+        "ExamineDescription": "This locker looks very out of place in this cave. It seems to be fitted with an electronic card reader.",
+        "LocationInWorldName": "Forest Cave",
+        "IsTakeable": "False",
+        "IsEquippable": "False",
+        "EquipLocation": "Hands",
+        "ScoreValue": "0",
+        "CorrectUseObject": "Keycard",
+        "RewardObject": "Jewel"
+      },
+      {
+        "Name": "Jewel",
+        "WorldDescription": "There's a jewel sitting on the ground.",
+        "ExamineDescription": "This jewel looks like it's worth a lot of money.",
+        "LocationInWorldName": "Unknown",
+        "IsTakeable": "True",
+        "IsEquippable": "False",
+        "EquipLocation": "Hands",
+        "ScoreValue": "10",
+        "CorrectUseObject": "",
+        "RewardObject": ""
+      },
+      {
+        "Name": "Lantern",
+        "WorldDescription": "There's a lantern sitting on the ground.",
+        "ExamineDescription": "This lantern looks like it could light up a room. Or something that only counts as a room for the purposes of this adventure.",
+        "LocationInWorldName": "Unknown",
+        "IsTakeable": "True",
+        "IsEquippable": "True",
+        "EquipLocation": "Hip",
+        "ScoreValue": "0",
+        "CorrectUseObject": "",
+        "RewardObject": ""
       }
     ]
   },
